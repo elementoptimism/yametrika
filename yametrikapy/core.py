@@ -135,7 +135,7 @@ class BaseMetrika(object):
       else:
           params['username'] = self._Username
           params['password'] = self._Password
-      self._data = self._client.Request('POST', self.OAUTH_TOKEN, params=params)
+      self._data = self._client.request('POST', self.OAUTH_TOKEN, params=params)
       self._AuthorizeHandle()
 
   def _Auth(f):
@@ -161,7 +161,7 @@ class BaseMetrika(object):
   @_Auth
   def _GetData(self, method, uri, params={}):
       headers = self._GetHeaders()
-      self._data = self._client.Request(method, uri, params=params, headers=headers)
+      self._data = self._client.request(method, uri, params=params, headers=headers)
       if self._client.Status == 400:
           raise BadRequestError('%d %s' % (self._client.Status, 'Check your request'))
       if self._client.Status == 401:
